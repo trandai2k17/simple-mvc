@@ -1,0 +1,85 @@
+﻿@model simple_mvc.Domain.Entities.Villa
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_Layout";
+}
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="text-white py-2">Add new</div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form asp-action="Edit" asp-controller="Home" asp-area="VillaManage"
+              method="post" id="createVillaForm2" name="createVillaForm2" class="row" enctype="multipart/form-data">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-10">
+                    @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+
+                    <div class="form-floating py-1 col-12">
+                        @Html.TextBoxFor(model => model.Name, new {  @class = "form-control border shadow" })
+                        @Html.LabelFor(m => m.Name, new { @class = "control-label ms-2 text-black"})
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class="text-danger" })
+                    </div>
+                    <div class="form-floating py-1 col-12">
+                        @Html.TextBoxFor(model => model.Description, new {  @class = "form-control border shadow" })
+                        @Html.LabelFor(m => m.Description, new { @class = "control-label ms-2 text-black"})
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class="text-danger" })
+                    </div>
+                    <div class="form-floating py-1 col-12">
+                        @Html.TextBoxFor(model => model.Price, new {  @class = "form-control border shadow" })
+                        @Html.LabelFor(m => m.Price, new { @class = "control-label ms-2 text-black"})
+                        @Html.ValidationMessageFor(m => m.Price, "", new { @class="text-danger" })
+                    </div>
+                    <div class="form-floating py-1 col-12">
+                        @Html.TextBoxFor(model => model.Sqft, new {  @class = "form-control border shadow" })
+                        @Html.LabelFor(m => m.Sqft, new { @class = "control-label ms-2 text-black"})
+                        @Html.ValidationMessageFor(m => m.Sqft, "", new { @class="text-danger" })
+                    </div>
+                    <div class="form-floating py-1 col-12">
+                        @Html.TextBoxFor(model => model.Occupancy, new {  @class = "form-control border shadow" })
+                        @Html.LabelFor(m => m.Occupancy, new { @class = "control-label ms-2 text-black"})
+                        @Html.ValidationMessageFor(m => m.Occupancy, "", new { @class="text-danger" })
+                    </div>
+
+                    @Html.LabelFor(m => m.ImageUrl, new { @class = "control-label ms-2 text-black"})
+                    <div class="form-floating py-1 col-12">
+                        @Html.HiddenFor(model => model.ImageUrl, new {  @class = "form-control border shadow" })
+                        @Html.TextBoxFor(model => model.Image, new {  @class = "border shadow ms-2", type="file" })
+                        @Html.ValidationMessageFor(m => m.ImageUrl, "", new { @class="text-danger" })
+                    </div>
+
+
+                    <div class="row pt-2">
+                        <div class="col-6 col-md-3">
+                            <button type="submit" value="Edit" class="btn btn-info w-100">
+                                <i class="bg-info bi-check-circle"></i> Save
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a href="@Url.Action("Index", "Home",new {Area="VillaManage"})" class="btn btn-secondary w-100">
+                                <i class="bi bi-x-circle"></i>
+                                Back
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <img src="~\@Model.ImageUrl" width="100%"
+                         style="border-radius: 5px; border: 1px solid #bbb9b9" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

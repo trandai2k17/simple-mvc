@@ -1,0 +1,96 @@
+﻿@model IEnumerable<simple_mvc.Domain.Entities.Villa>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<h1>Index</h1>
+
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="py-2">Villa list</div>
+        </div>
+    </div>
+
+    <div class="card-body border p-4">
+        <div class="row pb-3">
+            <div class="col-6 offset-6 text-end">
+                @* <a asp-area="Villa" asp-controller="Villa" asp-action="Create" class="btn btn-secondary">
+                <i class="bi bi-plus-circle"></i>
+                Add new
+                </a> *@
+                <a href="@Url.Action("Create","Home",new {Area="VillaManage"})" class="btn btn-secondary">
+                    <i class="bi bi-plus-circle"></i>
+                    Add new
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        <table class="table table-striped table-bordered table-light">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Sqft)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Occupancy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ImageUrl)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sqft)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Occupancy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImageUrl)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Villa", new { id=item.ID, Area="VillaManage"}, new {@class="btn btn-primary"}) |
+                            @Html.ActionLink("Details", "Details", "Villa", new { id=item.ID, Area="VillaManage"},  new { @class="btn btn-secondary" }) |
+                            @Html.ActionLink("Delete", "Delete", "Villa", new {  id=item.ID, Area="VillaManage"},  new { @class="btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

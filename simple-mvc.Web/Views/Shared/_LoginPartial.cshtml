@@ -1,0 +1,30 @@
+﻿@using simple_mvc.Domain.Entities;
+@using Microsoft.AspNetCore.Identity;
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="#">Hello, @UserManager.GetUserName(User)</a>
+        </li>
+        <li class="nav-item">
+            @* <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Sign Out</a> *@
+            <form id="logoutForm" class="form-inline" asp-area="" asp-route-returnUrl="@Url.Action("Logout", "Account", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Sign Out</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" id="register" asp-controller="Account" asp-action="Register" asp-area="Identity">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="login" asp-controller="Account" asp-action="Login" asp-area="Identity">Login</a>
+        </li>
+    }
+    
+</ul>

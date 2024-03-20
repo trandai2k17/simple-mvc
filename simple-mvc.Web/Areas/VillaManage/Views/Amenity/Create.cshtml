@@ -1,0 +1,57 @@
+﻿@model simple_mvc.Web.ViewModels.AmenityVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_Layout";
+}
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="py-2">Create Amenity</div>
+        </div>
+    </div>
+
+    <div class="card-body border p-4">
+        <div class="row">
+            <div class="col-md-10">
+                <form asp-action="Create" asp-controller="VillaNumber" asp-area="VillaManage" method="post" id="createVillaNumberForm" name="createVillaNumberForm" class="row">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.LabelFor(m => m.VillaList, new { @class = "control-label text-black"})
+                    <div class="form-group py-1 col-12">
+                        @Html.DropDownListFor(m => m.Amenity.VillaId, Model.VillaList, new { @class="form-select ms-2 border shadow"})
+                        @Html.ValidationMessageFor(m =>  m.Amenity.VillaId, "", new { @class="text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Amenity.Name, new { @class = "control-label text-black"})
+                        @Html.TextBoxFor(m => m.Amenity.Name, new { @class = "form-control ms-2 text-black shadow"})
+                        @Html.ValidationMessageFor(m => m.Amenity.Name, "", new { @class="text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Amenity.Description, new { @class = "control-label text-black"})
+                        @Html.TextBoxFor(m => m.Amenity.Description, new { @class = "form-control ms-2 text-black shadow"})
+                        @Html.ValidationMessageFor(m => m.Amenity.Description, "", new { @class="text-danger" })
+                    </div>
+
+                    <div class="row pt-2">
+                        <div class="col-6 col-md-3">
+                            <button asp-area="VillaManage" type="submit" value="Create" class="btn btn-info w-100">
+                                <i class="bg-info bi-check-circle"></i> Save
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a href="@Url.Action("Index", "Amenity",new {Area="VillaManage"})" class="btn btn-secondary w-100">
+                                <i class="bi bi-x-circle"></i>
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
