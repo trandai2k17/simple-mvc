@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using NuGet.Packaging.Core;
 using simple_mvc.Application.Common.Interfaces;
 using simple_mvc.Domain.Entities;
@@ -40,7 +41,14 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseDefaultFiles();
+//app.UseDefaultFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "wwwroot")),
+    RequestPath = "/wwwroot"
+});
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -48,19 +56,21 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapAreaControllerRoute(
-        name: "VillaArea",
+        name: "VillaManage",
         areaName: "VillaManage",
         pattern: "VillaManage/{controller=Home}/{action=Index}"
     );
 
 app.MapControllerRoute(
-            name: "VillaManage",
-            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+            name: "areaRoute",
+            pattern: "{area:exists}/{controller}/{action}");
 
-app.MapAreaControllerRoute(
-      name: "default",
-      areaName: "VillaManage",
-      pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapAreaControllerRoute(
+//      name: "default",
+//      areaName: "default",
+//      pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 //app.MapControllerRoute(
 //    name: "default",

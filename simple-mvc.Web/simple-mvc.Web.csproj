@@ -17,6 +17,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="wwwroot\assets\xcustomize\**" />
+	  <Compile Remove="wwwroot\dunzo\**" />
+	  <Content Remove="wwwroot\assets\xcustomize\**" />
+	  <Content Remove="wwwroot\dunzo\**" />
+	  <EmbeddedResource Remove="wwwroot\assets\xcustomize\**" />
+	  <EmbeddedResource Remove="wwwroot\dunzo\**" />
+	  <None Remove="wwwroot\assets\xcustomize\**" />
+	  <None Remove="wwwroot\dunzo\**" />
+	  <TypeScriptCompile Remove="wwwroot\assets\xcustomize\**" />
+	  <TypeScriptCompile Remove="wwwroot\dunzo\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Content Remove="Areas\VillaManage\Views\Home\Create.cshtml" />
 	  <Content Remove="Areas\VillaManage\Views\Home\Delete.cshtml" />
 	  <Content Remove="Areas\VillaManage\Views\Home\Details.cshtml" />
